@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     Uri selectedImageUri;
 
 
+    
 
     //데이터베이스에서 데이터를 읽거나 쓰려면 DatabaseReference의 인스턴스가 필요합니다.
     FirebaseDatabase database = FirebaseDatabase.getInstance();
