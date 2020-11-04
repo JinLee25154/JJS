@@ -1,4 +1,4 @@
-package com.example.main_test_1029;
+package com.example.java_kimsuyeon;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
