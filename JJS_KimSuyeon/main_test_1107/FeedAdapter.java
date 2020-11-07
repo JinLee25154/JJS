@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
@@ -22,12 +21,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 // 작성자: 김수연, 11/6
+// Feed 데이터들을 관리할 FeedAdapter 클래스
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
     ArrayList<Feed> items = new ArrayList<Feed>();
-    HashMap<Button, Feed> feedMap = new HashMap<Button, Feed>();
     private int position;
 
     public int getPosition() {
@@ -37,20 +35,21 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
     public void setPosition(int position) {
         this.position = position;
     }
+
+    // feed_item.xml에 포함된 view들의 기능 구현
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         final LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.feed_item, viewGroup, false);
-        final LinearLayout linearLayout1 = (LinearLayout) itemView.findViewById(R.id.linearLayout1);
         Button btnMore;
-        Button btnComment;
-        final Button btnDeleteComment;
         ImageButton btnPrev, btnNext;
-        final EditText editComment;
-        final TextView viewComment;
-        final TextView commentNickname;
         final ViewFlipper viewFlipper1;
+        final EditText editComment;
+        Button btnComment;
+        final TextView commentNickname;
+        final TextView viewComment;
+        final Button btnDeleteComment;
 
         btnPrev = (ImageButton) itemView.findViewById(R.id.btnPrev);
         btnNext = (ImageButton) itemView.findViewById(R.id.btnNext);
@@ -63,8 +62,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
         btnPrev.setImageResource(R.drawable.ic_left_arrow);
         btnNext.setImageResource(R.drawable.ic_right_arrow);
 
+        // ViewFlipper 객체의 메서드와 버튼의 onClickListener를 이용하여 이미지뷰를 전환할 수 있게 함.
         viewFlipper1 = itemView.findViewById(R.id.viewFlipper1);
-
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,13 +77,16 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
             }
         });
 
+        // feed_item의 뷰들 가져오기
         btnMore = (Button) itemView.findViewById(R.id.btnMore);
         ((Activity)viewGroup.getContext()).registerForContextMenu(btnMore);
         editComment = (EditText) itemView.findViewById(R.id.editComment);
         btnComment = (Button) itemView.findViewById(R.id.btnComment);
+        commentNickname = (TextView) itemView.findViewById(R.id.commentNickname);
         viewComment = (TextView) itemView.findViewById(R.id.viewComment);
         btnDeleteComment = (Button) itemView.findViewById(R.id.btnDeleteComment);
-        commentNickname = (TextView) itemView.findViewById(R.id.commentNickname);
+
+        // 댓글 달기 버튼 이벤트 처리
         btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +104,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
                 }
             }
         });
+        // 댓글 삭제 버튼 이벤트 처리
         btnDeleteComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,7 +126,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
         return new ViewHolder(itemView);
     }
 
-
+    // 뷰홀더 객체 재사용하는 함수
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int position) {
         Feed item = items.get(position);
@@ -137,6 +140,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
         });
     }
 
+    // 뷰홀더 객체가 재사용될 때 호출되는 함수
     @Override
     public void onViewRecycled(ViewHolder holder) {
         holder.btnMore.setOnLongClickListener(null);
@@ -144,25 +148,31 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
     }
 
 
+    // Feed 객체들의 개수를 반환하는 함수
     @Override
     public int getItemCount() {
         return items.size();
     }
 
+    // items에 Feed 객체를 추가하는 함수
     public void addItem(Feed item) { items.add(item); }
 
+    // items를 설정하는 함수
     public void setItems(ArrayList<Feed> items) {
         this.items = items;
     }
 
+    // items의 position 위치의 Feed 객체를 가져오는 함수
     public Feed getItem(int position) {
         return items.get(position);
     }
 
+    // items의 position 위치에 Feed 객체를 설정하는 함수
     public void setItem(int position, Feed item) {
         items.set(position, item);
     }
 
+    // ViewHolder 클래스
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         Button nickname;
         Button category;
@@ -170,24 +180,23 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
         Button btnMore;
         Feed feedItem;
 
-        static HashMap<View, ViewHolder> viewHolderMap = new HashMap<View, ViewHolder>();
-
+        // ImageView를 저장하는 ArrayList. ImageView의 수가 가변적이므로 ArrayList로 선언함.
         ArrayList<ImageView> imageViews = new ArrayList<ImageView>();
         ImageView imv;
 
+        // ViewHolder 생성자
         public ViewHolder(View itemView) {
             super(itemView);
             nickname = (Button) itemView.findViewById(R.id.nickname);
             category = (Button) itemView.findViewById(R.id.category);
             target = (Button) itemView.findViewById(R.id.target);
             btnMore = (Button) itemView.findViewById(R.id.btnMore);
-
-            viewHolderMap.put(btnMore, this);
-
             imv = (ImageView) itemView.findViewById(R.id.im1);
+            // adapter에서는 contextMenu를 직접 사용하지 못하므로 button 객체에 직접 ContextMenuListener를 설정해준다.
             btnMore.setOnCreateContextMenuListener(this);
-
         }
+
+        // 뷰홀더 객체에 들어있는 뷰 객체의 데이터를 알맞은 Feed 내용으로 채워준다.s
         public void setItem(Feed item) {
             nickname.setText(item.getNickname());
             category.setText(item.getCategory());
@@ -195,6 +204,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
             imv.setImageBitmap(item.getBitmap());
             feedItem = item;
         }
+
+        // 각 피드별 더보기 컨텍스트메뉴 생성
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             MenuInflater mInflater = ((Activity)v.getContext()).getMenuInflater();
             menu.setHeaderTitle("더보기");
