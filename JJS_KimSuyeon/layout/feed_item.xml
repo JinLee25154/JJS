@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 작성자: 김수연, 11/5-->
-<!--Feed 뷰. 하나의 Feed 내용을 표시하기 위한 View-->
+<!-- 작성자: 김수연-->
+<!-- 11/5 Feed 하나를 나타내는 LinearLayout으로 작성-->
+
+<!-- Feed 뷰. 하나의 Feed 내용을 표시하기 위한 View-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -13,7 +15,6 @@
         app:cardElevation="5dp"
         app:cardUseCompatPadding="true" >
         <LinearLayout
-            android:id="@+id/linearLayout1"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -69,6 +70,11 @@
                     <ImageView
                         android:id="@+id/im2"
                         android:src="@drawable/mov05"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp" />
+                    <ImageView
+                        android:id="@+id/im3"
+                        android:src="@drawable/mov07"
                         android:layout_width="200dp"
                         android:layout_height="200dp" />
                 </ViewFlipper>

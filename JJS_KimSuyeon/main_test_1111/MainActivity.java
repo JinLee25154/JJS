@@ -1,4 +1,4 @@
-package com.example.main_test_1107;
+package com.example.main_test_1111;
 
 import android.app.AlertDialog;
 import android.graphics.Bitmap;
@@ -12,8 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-// 작성자: 김수연, 11/6
-// main 탭 작동 코드
+import java.util.ArrayList;
+
+// 작성자: 김수연
+// 11/6 Recyclerview와 FeedAdapter가 잘 작동하도록 작성
+
+// main 화면 작동 코드
 public class MainActivity extends AppCompatActivity {
     Button btnMore;
     FeedAdapter adapter;
@@ -23,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
         LinearLayoutManager layoutManager =
@@ -35,16 +38,22 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.t_shirt);
         Bitmap bm2 = BitmapFactory.decodeResource(getResources(), R.drawable.t_shirt2);
         Bitmap bm3 = BitmapFactory.decodeResource(getResources(), R.drawable.t_shirt3);
+        ArrayList<Bitmap> bm4 = new ArrayList<Bitmap>();
+        bm4.add(bm);
+        bm4.add(bm2);
+        bm4.add(bm3);
 
         // Feed 생성하여 adapter에 연결
-        adapter.addItem(new Feed("수연짱", "출근룩", "전체 여성", "통통함", "20대 여성", bm));
-        adapter.addItem(new Feed("솔찬", "등교", "20대 남성", "날씬함", "10대 남성", bm2));
-        adapter.addItem(new Feed("진이", "등교", "10대 여성", "보통", "10대 여성", bm3));
+        adapter.addItem(new Feed("주영남", "마실룩", "전체 전체", "20대 여성", bm4));
+        adapter.addItem(new Feed("수연짱", "등교", "전체 여성", "통통함", "10대 여성", bm));
+        adapter.addItem(new Feed("진이", "출근룩", "10대 여성", "보통", "20대 여성", bm2));
+        adapter.addItem(new Feed("솔찬", "등교", "20대 남성", "날씬함", "10대 남성", bm3));
 
         recyclerView.setAdapter(adapter);
     }
 
-    // 컨텍스트메뉴의 메뉴 아이템이 선택되었을 때 실행되는 함수
+    // 각 Feed별 컨텍스트 메뉴의 메뉴 아이템이 선택되었을 때 실행되는 함수.
+    // 각 Feed 내의 "더보기" 버튼을 눌렀을 때 컨텍스트 메뉴가 표시된다.
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         int position = adapter.getPosition();
