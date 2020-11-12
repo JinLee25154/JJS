@@ -72,7 +72,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
         btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewFlipper1.showPrevious();
+                if (viewFlipper1.getDisplayedChild() > 0) {
+                    viewFlipper1.showPrevious();
+                }
             }
         });
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -178,11 +180,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
         Button category;
         Button target;
         Button btnMore;
+        ImageView profile;
         Feed feedItem;
 
-        // ImageView를 저장하는 ArrayList. ImageView의 수가 가변적이므로 ArrayList로 선언함.
-        ArrayList<ImageView> imageViews = new ArrayList<ImageView>();
-        ImageView imv1, imv2, imv3;
+        ImageView imageView;
+        // ImageView 배열. 최대 개수는 8
+        ImageView imvs[] = new ImageView[8];
 
         // ViewHolder 생성자
         public ViewHolder(View itemView) {
@@ -191,13 +194,19 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
             category = (Button) itemView.findViewById(R.id.category);
             target = (Button) itemView.findViewById(R.id.target);
             btnMore = (Button) itemView.findViewById(R.id.btnMore);
-            imv1 = (ImageView) itemView.findViewById(R.id.im1);
-            imv2 = (ImageView) itemView.findViewById(R.id.im2);
-            imv3 = (ImageView) itemView.findViewById(R.id.im3);
 
-//            imageViews.add(imv1);
-//            imageViews.add(imv2);
-//            imageViews.add(imv3);
+            imageView = (ImageView) itemView.findViewById(R.id.im1);
+
+            imvs[0] = (ImageView) itemView.findViewById(R.id.im1);
+            imvs[1] = (ImageView) itemView.findViewById(R.id.im2);
+            imvs[2] = (ImageView) itemView.findViewById(R.id.im3);
+            imvs[3] = (ImageView) itemView.findViewById(R.id.im4);
+            imvs[4] = (ImageView) itemView.findViewById(R.id.im5);
+            imvs[5] = (ImageView) itemView.findViewById(R.id.im6);
+            imvs[6] = (ImageView) itemView.findViewById(R.id.im7);
+            imvs[7] = (ImageView) itemView.findViewById(R.id.im8);
+
+            profile = (ImageView) itemView.findViewById(R.id.profile);
 
             // adapter에서는 contextMenu를 직접 사용하지 못하므로 button 객체에 직접 ContextMenuListener를 설정해준다.
             btnMore.setOnCreateContextMenuListener(this);
@@ -209,15 +218,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
             category.setText(item.getCategory());
             target.setText(item.getTarget());
 
-            imv1.setImageBitmap(item.getBitmap());
-
-//            imv1.setImageBitmap(item.getArrBM().get(0));
-//            imv2.setImageBitmap(item.getArrBM().get(1));
-//            imv3.setImageBitmap(item.getArrBM().get(2));
-//
-//            imageViews.add(imv1);
-//            imageViews.add(imv2);
-//            imageViews.add(imv3);
+            imageView.setImageBitmap(item.getBitmap());
+            
+            int i = 0;
+            while (item.getArrBM()[i] != null && i < 8) {
+                    imvs[i].setImageBitmap(item.getArrBM()[i]);
+                    i++;
+            }
+            profile.setImageBitmap(item.getProfile());
 
             feedItem = item;
         }
