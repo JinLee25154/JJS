@@ -26,7 +26,7 @@ import java.util.ArrayList;
 // 11/6 각 Feed 내 View들의 기능 구현. ViewHolder 클래스 정의.
 // 11/11 댓글 내용이 없을 때 댓글 업로드가 안 되는 기능 미작동, 알림 미작동 문제 해결
 // -> Visibility() 문제: 댓글 내용이 있을 때만 Visible로 설정, Toast.makeText()에 show() 추가
-
+// 11/12 ArrayList 대신 배열 이용하여 ImageView 및 Bitmap을 담는 변수로 변경
 
 // Feed 데이터들을 관리할 FeedAdapter 클래스
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
