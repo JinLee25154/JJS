@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- 작성자: 김수연-->
 <!-- 11/5 Feed 하나를 나타내는 LinearLayout으로 작성-->
+<!-- 11/12 profile을 위한 ImageView 추가, ViewFlipper 내 ImageView를 8개로 설정-->
 
 <!-- Feed 뷰. 하나의 Feed 내용을 표시하기 위한 View-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,6 +23,12 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile"
+                    android:src="@drawable/mov01"
+                    android:layout_gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
                 <Button
                     android:clickable="false"
                     android:id="@+id/nickname"
@@ -64,17 +71,34 @@
                     android:layout_height="wrap_content" >
                     <ImageView
                         android:id="@+id/im1"
-                        android:src="@drawable/mov01"
                         android:layout_width="200dp"
                         android:layout_height="200dp" />
                     <ImageView
                         android:id="@+id/im2"
-                        android:src="@drawable/mov05"
                         android:layout_width="200dp"
                         android:layout_height="200dp" />
                     <ImageView
                         android:id="@+id/im3"
-                        android:src="@drawable/mov07"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp" />
+                    <ImageView
+                        android:id="@+id/im4"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp" />
+                    <ImageView
+                        android:id="@+id/im5"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp" />
+                    <ImageView
+                        android:id="@+id/im6"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp" />
+                    <ImageView
+                        android:id="@+id/im7"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp" />
+                    <ImageView
+                        android:id="@+id/im8"
                         android:layout_width="200dp"
                         android:layout_height="200dp" />
                 </ViewFlipper>
