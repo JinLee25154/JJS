@@ -68,7 +68,7 @@ public class FragmentBottom extends Fragment {
                     View goView = (View) View.inflate(getContext(), R.layout.activity_view_clothes, null);
                     Intent intent = new Intent(getContext(), ViewClothesActivity.class);
                     intent.putExtra("index", index);
-                    intent.putExtra("category", 0);
+                    intent.putExtra("category", 1);
                     startActivity(intent);
                 }
             });
