@@ -1,6 +1,7 @@
 package com.example.closet;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,9 @@ import androidx.fragment.app.Fragment;
 import java.util.ArrayList;
 
 public class FragmentTop extends Fragment {
-    //Bitmap topSample = BitmapFactory.decodeResource(getResources(), R.drawable.top1);
-    ArrayList<Clothes> topList = new ArrayList<Clothes>();
+
+    public static ArrayList<Clothes> topList = new ArrayList<Clothes>();
+
 //    topList.add(new Clothes(topSample, 0, "샘플"));
 //    Clothes[] topArray = {new Clothes(topSample, 0, "샘플")};
 
@@ -23,20 +25,15 @@ public class FragmentTop extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate( R.layout.fragment_top, container, false );
 
+        //그리드뷰 어댑터 설정 아래 TopGridAdapter 클래스 연계
         final GridView gvTop = (GridView) view.findViewById(R.id.topGrid);
         TopGridAdapter gTopAdapter = new TopGridAdapter(container.getContext());
         gvTop.setAdapter(gTopAdapter);
 
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            Clothes newClothes = (Clothes) bundle.getSerializable("clothes");
-            topList.add(newClothes);
-        }
-
         return view;
     }
 
-    public class TopGridAdapter extends BaseAdapter {
+    public class TopGridAdapter extends BaseAdapter  {
         Context context;
 
 
@@ -65,9 +62,16 @@ public class FragmentTop extends Fragment {
             imageview.setLayoutParams(new GridView.LayoutParams(350, 450));
             imageview.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageview.setPadding(5, 5, 5, 5);
-
             imageview.setImageBitmap(topList.get(i).getImage());
 
+            imageview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    View goView = (View) View.inflate(getContext(), R.layout.activity_view_clothes, null);
+                    Intent intent = new Intent(getContext(), ViewClothesActivity.class);
+                    startActivity(intent);
+                }
+            });
             return imageview;
         }
     }
