@@ -31,7 +31,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SetActivity extends Activity {
+public class SetActivity extends AppCompatActivity {
 
     private EditText user_nickname;
     private TextView user_gender;

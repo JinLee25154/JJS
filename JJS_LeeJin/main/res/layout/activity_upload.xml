@@ -48,18 +48,18 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="425dp"
+        android:layout_height="200dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="425dp"
+            android:layout_height="200dp"
             android:orientation="vertical">
 
             <GridView
                 android:id="@+id/gridView1"
                 android:layout_width="match_parent"
-                android:layout_height="425dp"
+                android:layout_height="300dp"
                 android:background="#8181F7"
                 android:gravity="center"
                 android:horizontalSpacing="1dp"
@@ -69,6 +69,19 @@
         </LinearLayout>
     </ScrollView>
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/describe"
+        android:hint="문구 입력..."
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        android:backgroundTint="#8181f7"
+        >
+    </EditText>
+
+
 
 
     <SlidingDrawer
@@ -77,7 +90,9 @@
         android:layout_height="match_parent"
         android:content="@+id/content"
         android:handle="@+id/handle"
+
         >
+
         <Button
             android:id="@+id/handle"
             android:layout_width="wrap_content"
@@ -85,60 +100,37 @@
             android:background="#8181f7"
             android:text="옷장" />
 
+
         <LinearLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="상의">
-
-            </TextView>
             <Gallery
                 android:id="@+id/gallery_top"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:spacing="5dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="하의"></TextView>
             <Gallery
                 android:id="@+id/gallery_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:spacing="5dp" />
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="아우터"></TextView>
             <Gallery
                 android:id="@+id/gallery_outer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:spacing="5dp" />
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="신발"></TextView>
             <Gallery
                 android:id="@+id/gallery_shoes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:spacing="5dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="악세사리"></TextView>
             <Gallery
                 android:id="@+id/gallery_accessory"
                 android:layout_width="match_parent"
@@ -149,9 +141,6 @@
 
 
     </SlidingDrawer>
-
-
-
 
 
 </LinearLayout>

@@ -13,18 +13,21 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
-import static com.example.mobileprogramming_teamproject_leejin.ClosetActivity.clothes12;
+import static com.example.mobileprogramming_teamproject_leejin.FragmentTop.topList;
 
 @SuppressWarnings("deprecation")
 
-public class UploadActivity extends Activity {
+public class UploadActivity extends AppCompatActivity {
     /*
     clothes12 -> clothes로 고치기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
      */
@@ -46,16 +49,17 @@ public class UploadActivity extends Activity {
     ArrayList<Bitmap> galleryShoes = new ArrayList<Bitmap>();
     ArrayList<Bitmap> galleryAccessory = new ArrayList<Bitmap>();
 
-    Clothes c1;
-    Clothes c2;
-    Clothes c3;
+    EditText description;
+
+
+
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
-
+        /*
         BitmapDrawable drawable1 = (BitmapDrawable) getResources().getDrawable(R.drawable.top);//기본이미지 가져오기
         Bitmap defaultImg1 = drawable1.getBitmap();//기본이미지를 비트맵으로 변환해서
 
@@ -72,29 +76,48 @@ public class UploadActivity extends Activity {
         c2 = new Clothes(defaultImg2,3,"신발입니다.");
         c3 = new Clothes(defaultImg3,1,"바지입니다.");
 
-        clothes12.add(c1);
-        clothes12.add(c2);
-        clothes12.add(c3);
-
+        topList.add(c1);
+        topList.add(c2);
+        topList.add(c3);
+        */
         //갤러리에 추가
-        for(int i=0;i<clothes12.size();i++){
-            if(clothes12.get(i).getCategory()==0){//상의이면       상의 하의 아우터 신발 악세사리
-                galleryTop.add(clothes12.get(i).getImage());
+        BitmapDrawable topFont = (BitmapDrawable) getResources().getDrawable(R.drawable.topfont);//기본이미지 가져오기
+        Bitmap top_val = topFont.getBitmap();//기본이미지를 비트맵으로 변환해서
+        galleryTop.add(top_val);
+
+        BitmapDrawable bottomFont = (BitmapDrawable) getResources().getDrawable(R.drawable.bottomfont);//기본이미지 가져오기
+        Bitmap bottom_val = bottomFont.getBitmap();//기본이미지를 비트맵으로 변환해서
+        galleryBottom.add(bottom_val);
+
+        BitmapDrawable outerFont = (BitmapDrawable) getResources().getDrawable(R.drawable.outerfont);//기본이미지 가져오기
+        Bitmap outer_val = outerFont.getBitmap();//기본이미지를 비트맵으로 변환해서
+        galleryOuter.add(outer_val);
+
+        BitmapDrawable shoesFont = (BitmapDrawable) getResources().getDrawable(R.drawable.shoesfont);//기본이미지 가져오기
+        Bitmap shoes_val = shoesFont.getBitmap();//기본이미지를 비트맵으로 변환해서
+        galleryShoes.add(shoes_val);
+
+        BitmapDrawable accessoryFont = (BitmapDrawable) getResources().getDrawable(R.drawable.accessoryfont);//기본이미지 가져오기
+        Bitmap accessory_val = accessoryFont.getBitmap();//기본이미지를 비트맵으로 변환해서
+        galleryAccessory.add(accessory_val);
+
+        for(int i=0;i<topList.size();i++){
+            if(topList.get(i).getCategory()==0){//상의이면       상의 하의 아우터 신발 악세사리
+                galleryTop.add(topList.get(i).getImage());
             }
-            else if(clothes12.get(i).getCategory()==1){//하의이면       상의 하의 아우터 신발 악세사리
-                galleryBottom.add(clothes12.get(i).getImage());
+            else if(topList.get(i).getCategory()==1){//하의이면       상의 하의 아우터 신발 악세사리
+                galleryBottom.add(topList.get(i).getImage());
             }
-            else if(clothes12.get(i).getCategory()==2){//아우터이면       상의 하의 아우터 신발 악세사리
-                galleryOuter.add(clothes12.get(i).getImage());
+            else if(topList.get(i).getCategory()==2){//아우터이면       상의 하의 아우터 신발 악세사리
+                galleryOuter.add(topList.get(i).getImage());
             }
-            else if(clothes12.get(i).getCategory()==3){//신발이면       상의 하의 아우터 신발 악세사리
-                galleryShoes.add(clothes12.get(i).getImage());
+            else if(topList.get(i).getCategory()==3){//신발이면       상의 하의 아우터 신발 악세사리
+                galleryShoes.add(topList.get(i).getImage());
             }
-            else if(clothes12.get(i).getCategory()==4){//악세사리이면       상의 하의 아우터 신발 악세사리
-                galleryAccessory.add(clothes12.get(i).getImage());
+            else if(topList.get(i).getCategory()==4){//악세사리이면       상의 하의 아우터 신발 악세사리
+                galleryAccessory.add(topList.get(i).getImage());
             }
         }
-
 
         //사용자가 선택한 옷 이미지들을 보여줄 그리드뷰
         gv = (GridView) findViewById(R.id.gridView1);
@@ -209,17 +232,19 @@ public class UploadActivity extends Activity {
             }
         });
 
-        /*
+
         //수연님 액티비티와 합칠 때 주석 풀기!
         //설정에서 완료 버튼 누르면 홈으로 돌아가며 게시물 업로드 하기!(게시물 정보 전송)
         btn_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent_goHome = new Intent(getApplicationContext(),HomeActivity.class);
-
+                description = findViewById(R.id.describe);
+                intent_goHome.putExtra("upload_to_home_describe",description.getText().toString());
+                startActivity(intent_goHome);
             }
         });
-        */
+
 
 
     }

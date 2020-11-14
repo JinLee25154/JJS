@@ -34,7 +34,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity {
 
     private EditText user_nickname;
     private Spinner user_gender;
