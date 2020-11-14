@@ -11,7 +11,7 @@ public class FragmentOuter extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.outer_item, container, false);
+        return inflater.inflate(R.layout.fragment_outer, container, false);
     }
 
 }
