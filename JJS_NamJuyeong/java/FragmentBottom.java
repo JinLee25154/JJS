@@ -15,7 +15,7 @@ public class FragmentBottom extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate( R.layout.bottom_item, container, false );
+        View view = inflater.inflate( R.layout.fragment_bottom, container, false );
 
         final GridView gvBottom = (GridView) view.findViewById(R.id.bottomGrid);
         BottomGridAdapter gBottomAdapter = new BottomGridAdapter(container.getContext());
