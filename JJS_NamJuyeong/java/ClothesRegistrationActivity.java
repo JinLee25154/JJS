@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 
 import java.io.InputStream;
 
+import static com.example.closet.FragmentBottom.bottomList;
 import static com.example.closet.FragmentTop.topList;
 
 public class ClothesRegistrationActivity extends Activity {
@@ -94,7 +95,12 @@ public class ClothesRegistrationActivity extends Activity {
                     //static 선언한 topList에 바로 추가
                     //카테고리별 옷 리스트에 비트맵, 카테고리, 옷설명 정보 담은 객체 추가
                     //category에 맞게 리스트 선택할 수 있도록 수정해야함 현재는 topList만 사용 중
-                    topList.add(new Clothes(choiceClothesImageBitmap, category, clothesExplanation.getText().toString()));
+                    if(category==0){
+                        topList.add(new Clothes(choiceClothesImageBitmap, category, clothesExplanation.getText().toString()));
+                    }else if(category==1){
+                        bottomList.add(new Clothes(choiceClothesImageBitmap, category, clothesExplanation.getText().toString()));
+                    }
+
 
                     finish();
                 }else{

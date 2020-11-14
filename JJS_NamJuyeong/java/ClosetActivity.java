@@ -1,7 +1,6 @@
 package com.example.closet;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,10 +25,6 @@ public class ClosetActivity extends AppCompatActivity{
     FragmentOuter fragment3;
     Fragment4 fragment4;
     Fragment5 fragment5;
-
-    Bitmap newClothesImage;
-    int newClothesCategory;
-    String newClothesExplanation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +84,6 @@ public class ClosetActivity extends AppCompatActivity{
         btnGoClothesRegistration.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 Intent intent = new Intent(getApplicationContext(), ClothesRegistrationActivity.class);
-                //start~ForResult()에서 아래로 바꿔보았음. test 안해본 상태이며 onActivityResult 주석처리 해놓음
                 startActivity(intent);
             }
         });

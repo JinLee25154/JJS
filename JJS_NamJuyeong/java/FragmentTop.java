@@ -18,9 +18,6 @@ public class FragmentTop extends Fragment {
 
     public static ArrayList<Clothes> topList = new ArrayList<Clothes>();
 
-//    topList.add(new Clothes(topSample, 0, "샘플"));
-//    Clothes[] topArray = {new Clothes(topSample, 0, "샘플")};
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate( R.layout.fragment_top, container, false );
@@ -35,7 +32,7 @@ public class FragmentTop extends Fragment {
 
     public class TopGridAdapter extends BaseAdapter  {
         Context context;
-
+        int index;
 
         public TopGridAdapter(Context c){
             context = c;
@@ -63,12 +60,15 @@ public class FragmentTop extends Fragment {
             imageview.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageview.setPadding(5, 5, 5, 5);
             imageview.setImageBitmap(topList.get(i).getImage());
+            index = i;
 
             imageview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     View goView = (View) View.inflate(getContext(), R.layout.activity_view_clothes, null);
                     Intent intent = new Intent(getContext(), ViewClothesActivity.class);
+                    intent.putExtra("index", index);
+                    intent.putExtra("category", 0);
                     startActivity(intent);
                 }
             });
