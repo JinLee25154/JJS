@@ -1,4 +1,4 @@
-package com.example.main_test_1111;
+package com.example.main_final;
 
 import android.app.AlertDialog;
 import android.graphics.Bitmap;
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 // 작성자: 김수연
 // 11/6 Recyclerview와 FeedAdapter가 잘 작동하도록 작성
+// 11/14 onContextItemSelected()에서 item.getItemId()가 R.id.menu_body_info인 case 삭제
 
 // main 화면 작동 코드
 public class MainActivity extends AppCompatActivity {
@@ -45,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bm5 = BitmapFactory.decodeResource(getResources(), R.drawable.profile_ex);
 
         // Feed 생성하여 adapter에 연결
-        adapter.addItem(new Feed("꺅꺅", "룩", "아무나", "20대 혼종", bm4, bm5));
+        adapter.addItem(new Feed("User", "룩", "전체 전체", "20대 전체", "Test", bm4, bm5));
+        adapter.addItem(new Feed("꺅꺅", "룩", "아무나", "20대 혼종", "안녕하세요. 제 이름은 김수연입니다. 현재 국민대 소프트웨어융합대학에 재학 중이고, 학점은 너무 신경 쓰지 않습니다. 하지만 뭔 상관입니까 하하하", bm4, bm5));
         adapter.addItem(new Feed("주영남", "마실룩", "전체 전체", "20대 여성", bm4));
         adapter.addItem(new Feed("수연짱", "등교", "전체 여성", "10대 여성", bm));
         adapter.addItem(new Feed("진이", "출근룩", "10대 여성", "20대 여성", bm2));
@@ -62,11 +64,6 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder dlg = new AlertDialog.Builder(MainActivity.this);
         dlg.setPositiveButton("닫기", null);
         switch(item.getItemId()) {
-            case R.id.menu_body_info:
-                dlg.setTitle("체형 정보");
-                dlg.setMessage(feed.menu_body_info);
-                dlg.show();
-                return true;
             case R.id.menu_person_info:
                 dlg.setTitle("성별/연령대 정보");
                 dlg.setMessage(feed.menu_person_info);

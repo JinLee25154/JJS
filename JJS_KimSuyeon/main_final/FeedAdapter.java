@@ -1,8 +1,6 @@
-package com.example.main_test_1111;
+package com.example.main_final;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -10,11 +8,11 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
@@ -26,7 +24,8 @@ import java.util.ArrayList;
 // 11/6 각 Feed 내 View들의 기능 구현. ViewHolder 클래스 정의.
 // 11/11 댓글 내용이 없을 때 댓글 업로드가 안 되는 기능 미작동, 알림 미작동 문제 해결
 // -> Visibility() 문제: 댓글 내용이 있을 때만 Visible로 설정, Toast.makeText()에 show() 추가
-// 11/12 ArrayList 대신 배열 이용하여 ImageView 및 Bitmap을 담는 변수로 변경
+// 11/14 nickname을 Button에서 TextView로 변경.
+// editComment, btnComment, commentNickname, viewComment, btnDeleteComment 삭제 및 btnComment, btnDeleteComment 버튼클릭 리스너 삭제
 
 // Feed 데이터들을 관리할 FeedAdapter 클래스
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
@@ -50,11 +49,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
         Button btnMore;
         ImageButton btnPrev, btnNext;
         final ViewFlipper viewFlipper1;
-        final EditText editComment;
-        Button btnComment;
-        final TextView commentNickname;
-        final TextView viewComment;
-        final Button btnDeleteComment;
+        RadioGroup rGroup;
+        final RadioButton rdoBest, rdoGood, rdoSoso, rdoBad, rdoToobad;
 
         btnPrev = (ImageButton) itemView.findViewById(R.id.btnPrev);
         btnNext = (ImageButton) itemView.findViewById(R.id.btnNext);
@@ -87,49 +83,55 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
         // feed_item의 뷰들 가져오기
         btnMore = (Button) itemView.findViewById(R.id.btnMore);
         ((Activity)viewGroup.getContext()).registerForContextMenu(btnMore);
-        editComment = (EditText) itemView.findViewById(R.id.editComment);
-        btnComment = (Button) itemView.findViewById(R.id.btnComment);
-        commentNickname = (TextView) itemView.findViewById(R.id.commentNickname);
-        viewComment = (TextView) itemView.findViewById(R.id.viewComment);
-        btnDeleteComment = (Button) itemView.findViewById(R.id.btnDeleteComment);
 
-        // 댓글 달기 버튼 이벤트 처리
-        btnComment.setOnClickListener(new View.OnClickListener() {
+        rGroup = (RadioGroup) itemView.findViewById(R.id.rGroup);
+        rdoBest = (RadioButton) itemView.findViewById(R.id.em_best);
+        rdoGood = (RadioButton) itemView.findViewById(R.id.em_good);
+        rdoSoso = (RadioButton) itemView.findViewById(R.id.em_soso);
+        rdoBad = (RadioButton) itemView.findViewById(R.id.em_bad);
+        rdoToobad = (RadioButton) itemView.findViewById(R.id.em_too_bad);
+
+        rGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                if ("".equals(editComment.getText().toString())) {
-                    Toast.makeText(inflater.getContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (viewComment.getVisibility() == android.view.View.GONE || btnDeleteComment.getVisibility() == android.view.View.GONE
-                            || commentNickname.getVisibility() == android.view.View.GONE) {
-                        commentNickname.setVisibility(android.view.View.VISIBLE);
-                        viewComment.setVisibility(android.view.View.VISIBLE);
-                        btnDeleteComment.setVisibility(android.view.View.VISIBLE);
-                    }
-                    viewComment.setText(editComment.getText().toString());
-                    editComment.setText("");
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == rdoBest.getId()) {
+                    rdoBest.setButtonDrawable(R.drawable.emoticon_customize_best);
+                    rdoGood.setButtonDrawable(R.drawable.emoticon_customize_good_gray);
+                    rdoSoso.setButtonDrawable(R.drawable.emoticon_customize_soso_gray);
+                    rdoBad.setButtonDrawable(R.drawable.emoticon_customize_bad_gray);
+                    rdoToobad.setButtonDrawable(R.drawable.emoticon_customize_too_bad_gray);
+                }
+                if (i == rdoGood.getId()) {
+                    rdoBest.setButtonDrawable(R.drawable.emoticon_customize_best_gray);
+                    rdoGood.setButtonDrawable(R.drawable.emoticon_customize_good);
+                    rdoSoso.setButtonDrawable(R.drawable.emoticon_customize_soso_gray);
+                    rdoBad.setButtonDrawable(R.drawable.emoticon_customize_bad_gray);
+                    rdoToobad.setButtonDrawable(R.drawable.emoticon_customize_too_bad_gray);
+                }
+                if (i == rdoSoso.getId()) {
+                    rdoBest.setButtonDrawable(R.drawable.emoticon_customize_best_gray);
+                    rdoGood.setButtonDrawable(R.drawable.emoticon_customize_good_gray);
+                    rdoSoso.setButtonDrawable(R.drawable.emoticon_customize_soso);
+                    rdoBad.setButtonDrawable(R.drawable.emoticon_customize_bad_gray);
+                    rdoToobad.setButtonDrawable(R.drawable.emoticon_customize_too_bad_gray);
+                }
+                if (i == rdoBad.getId()) {
+                    rdoBest.setButtonDrawable(R.drawable.emoticon_customize_best_gray);
+                    rdoGood.setButtonDrawable(R.drawable.emoticon_customize_good_gray);
+                    rdoSoso.setButtonDrawable(R.drawable.emoticon_customize_soso_gray);
+                    rdoBad.setButtonDrawable(R.drawable.emoticon_customize_bad);
+                    rdoToobad.setButtonDrawable(R.drawable.emoticon_customize_too_bad_gray);
+                }
+                if (i == rdoToobad.getId()) {
+                    rdoBest.setButtonDrawable(R.drawable.emoticon_customize_best_gray);
+                    rdoGood.setButtonDrawable(R.drawable.emoticon_customize_good_gray);
+                    rdoSoso.setButtonDrawable(R.drawable.emoticon_customize_soso_gray);
+                    rdoBad.setButtonDrawable(R.drawable.emoticon_customize_bad_gray);
+                    rdoToobad.setButtonDrawable(R.drawable.emoticon_customize_too_bad);
                 }
             }
         });
-        // 댓글 삭제 버튼 이벤트 처리
-        btnDeleteComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder dlg = new AlertDialog.Builder(inflater.getContext());
-                dlg.setTitle("댓글 삭제");
-                dlg.setMessage("댓글을 삭제하시겠습니까?");
-                dlg.setPositiveButton("삭제", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        viewComment.setVisibility(android.view.View.GONE);
-                        btnDeleteComment.setVisibility(android.view.View.GONE);
-                        commentNickname.setVisibility(android.view.View.GONE);
-                    }
-                });
-                dlg.setNegativeButton("취소", null);
-                dlg.show();
-            }
-        });
+
         return new ViewHolder(itemView);
     }
 
@@ -154,7 +156,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
         super.onViewRecycled(holder);
     }
 
-
     @Override
     public int getItemCount() {
         return items.size();
@@ -176,11 +177,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
 
     // ViewHolder 클래스
     static class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
-        Button nickname;
+        TextView nickname;
         Button category;
         Button target;
         Button btnMore;
         ImageView profile;
+        TextView description;
         Feed feedItem;
 
         ImageView imageView;
@@ -190,23 +192,28 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
         // ViewHolder 생성자
         public ViewHolder(View itemView) {
             super(itemView);
-            nickname = (Button) itemView.findViewById(R.id.nickname);
+            nickname = (TextView) itemView.findViewById(R.id.nickname);
             category = (Button) itemView.findViewById(R.id.category);
             target = (Button) itemView.findViewById(R.id.target);
             btnMore = (Button) itemView.findViewById(R.id.btnMore);
+            profile = (ImageView) itemView.findViewById(R.id.profile);
+            description = (TextView) itemView.findViewById(R.id.description);
 
             imageView = (ImageView) itemView.findViewById(R.id.im1);
 
-            imvs[0] = (ImageView) itemView.findViewById(R.id.im1);
-            imvs[1] = (ImageView) itemView.findViewById(R.id.im2);
-            imvs[2] = (ImageView) itemView.findViewById(R.id.im3);
-            imvs[3] = (ImageView) itemView.findViewById(R.id.im4);
-            imvs[4] = (ImageView) itemView.findViewById(R.id.im5);
-            imvs[5] = (ImageView) itemView.findViewById(R.id.im6);
-            imvs[6] = (ImageView) itemView.findViewById(R.id.im7);
-            imvs[7] = (ImageView) itemView.findViewById(R.id.im8);
+            int[] imid = { R.id.im1, R.id.im2, R.id.im3, R.id.im4, R.id.im5, R.id.im6, R.id.im7, R.id.im8};
+            //imvs[0] = (ImageView) itemView.findViewById(R.id.im1);
+            //imvs[1] = (ImageView) itemView.findViewById(R.id.im2);
+            //imvs[2] = (ImageView) itemView.findViewById(R.id.im3);
+            //imvs[3] = (ImageView) itemView.findViewById(R.id.im4);
+            //imvs[4] = (ImageView) itemView.findViewById(R.id.im5);
+            //imvs[5] = (ImageView) itemView.findViewById(R.id.im6);
+            //imvs[6] = (ImageView) itemView.findViewById(R.id.im7);
+            //imvs[7] = (ImageView) itemView.findViewById(R.id.im8);
 
-            profile = (ImageView) itemView.findViewById(R.id.profile);
+            for (int i = 0; i < 8; i++) {
+                imvs[i] = (ImageView) itemView.findViewById(imid[i]);
+            }
 
             // adapter에서는 contextMenu를 직접 사용하지 못하므로 button 객체에 직접 ContextMenuListener를 설정해준다.
             btnMore.setOnCreateContextMenuListener(this);
@@ -217,15 +224,16 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder>  {
             nickname.setText(item.getNickname());
             category.setText(item.getCategory());
             target.setText(item.getTarget());
+            profile.setImageBitmap(item.getProfile());
+            description.setText(item.getDescription());
 
             imageView.setImageBitmap(item.getBitmap());
-            
+
             int i = 0;
             while (item.getArrBM()[i] != null && i < 8) {
-                    imvs[i].setImageBitmap(item.getArrBM()[i]);
-                    i++;
+                imvs[i].setImageBitmap(item.getArrBM()[i]);
+                i++;
             }
-            profile.setImageBitmap(item.getProfile());
 
             feedItem = item;
         }
