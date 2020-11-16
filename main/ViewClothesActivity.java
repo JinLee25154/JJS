@@ -1,4 +1,4 @@
-package com.example.mobileprogramming_teamproject_leejin;
+package com.example.closet;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.example.mobileprogramming_teamproject_leejin.FragmentBottom.bottomList;
-import static com.example.mobileprogramming_teamproject_leejin.FragmentTop.topList;
+import static com.example.closet.FragmentAccessory.accessoryList;
+import static com.example.closet.FragmentBottom.bottomList;
+import static com.example.closet.FragmentOuter.outerList;
+import static com.example.closet.FragmentShoes.shoesList;
+import static com.example.closet.FragmentTop.topList;
 
 public class ViewClothesActivity extends AppCompatActivity {
     @Override
@@ -43,10 +46,16 @@ public class ViewClothesActivity extends AppCompatActivity {
             clothesExplanation.setText(bottomList.get(index).getExplanation());
         }else if(category == 2) {
             categoryTextView.setText("아우터");
+            clothesImage.setImageBitmap(outerList.get(index).getImage());
+            clothesExplanation.setText(outerList.get(index).getExplanation());
         }else if(category == 3) {
             categoryTextView.setText("신발");
+            clothesImage.setImageBitmap(shoesList.get(index).getImage());
+            clothesExplanation.setText(shoesList.get(index).getExplanation());
         }else if(category == 4) {
             categoryTextView.setText("액세서리");
+            clothesImage.setImageBitmap(accessoryList.get(index).getImage());
+            clothesExplanation.setText(accessoryList.get(index).getExplanation());
         }
 
 

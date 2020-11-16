@@ -1,4 +1,4 @@
-package com.example.mobileprogramming_teamproject_leejin;
+package com.example.closet;
 
 import android.content.Intent;
 import android.os.Bundle;

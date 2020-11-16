@@ -1,4 +1,4 @@
-package com.example.mobileprogramming_teamproject_leejin;
+package com.example.closet;
 
 import android.graphics.Bitmap;
 import android.os.Parcel;

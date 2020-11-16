@@ -1,4 +1,4 @@
-package com.example.mobileprogramming_teamproject_leejin;
+package com.example.closet;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class FragmentTop extends Fragment {
 
-    public static ArrayList<Clothes> topList = new ArrayList<Clothes>();
+    public static ArrayList<Clothes> topList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

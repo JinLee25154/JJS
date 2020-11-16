@@ -1,4 +1,4 @@
-package com.example.mobileprogramming_teamproject_leejin;
+package com.example.closet;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -19,8 +19,8 @@ import androidx.annotation.Nullable;
 
 import java.io.InputStream;
 
-import static com.example.mobileprogramming_teamproject_leejin.FragmentBottom.bottomList;
-import static com.example.mobileprogramming_teamproject_leejin.FragmentTop.topList;
+import static com.example.closet.FragmentBottom.bottomList;
+import static com.example.closet.FragmentTop.topList;
 
 public class ClothesRegistrationActivity extends Activity {
 

@@ -1,4 +1,4 @@
-package com.example.mobileprogramming_teamproject_leejin;
+package com.example.closet;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,8 +23,8 @@ public class ClosetActivity extends AppCompatActivity{
     FragmentTop fragmentTop;
     FragmentBottom fragmentBottom;
     FragmentOuter fragment3;
-    Fragment4 fragment4;
-    Fragment5 fragment5;
+    FragmentShoes fragment4;
+    FragmentAccessory fragment5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +41,8 @@ public class ClosetActivity extends AppCompatActivity{
         fragmentTop = new FragmentTop();
         fragmentBottom = new FragmentBottom();
         fragment3 = new FragmentOuter();
-        fragment4 = new Fragment4();
-        fragment5 = new Fragment5();
+        fragment4 = new FragmentShoes();
+        fragment5 = new FragmentAccessory();
         getSupportFragmentManager().beginTransaction().replace(R.id.container, fragmentTop).commit();
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.addTab(tabs.newTab().setText("상의"));

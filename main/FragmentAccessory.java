@@ -14,33 +14,33 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-public class FragmentBottom extends Fragment {
+public class FragmentAccessory extends Fragment {
 
-    public static ArrayList<Clothes> bottomList = new ArrayList<Clothes>();
+    public static ArrayList<Clothes> accessoryList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate( R.layout.fragment_bottom, container, false );
+        View view = inflater.inflate( R.layout.fragment_accessory, container, false );
 
-        //그리드뷰 어댑터 설정 아래 BottomGridAdapter 클래스 연계
-        final GridView gvBottom = (GridView) view.findViewById(R.id.bottomGrid);
-        BottomGridAdapter gBottomAdapter = new BottomGridAdapter(container.getContext());
-        gvBottom.setAdapter(gBottomAdapter);
+        //그리드뷰 어댑터 설정 아래 TopGridAdapter 클래스 연계
+        final GridView gvAccessory = (GridView) view.findViewById(R.id.accessoryGrid);
+        AccessoryGridAdapter gAccessoryAdapter = new AccessoryGridAdapter(container.getContext());
+        gvAccessory.setAdapter(gAccessoryAdapter);
 
         return view;
     }
 
-    public class BottomGridAdapter extends BaseAdapter  {
+    public class AccessoryGridAdapter extends BaseAdapter  {
         Context context;
         int index;
 
-        public BottomGridAdapter(Context c){
+        public AccessoryGridAdapter(Context c){
             context = c;
         }
 
         @Override
         public int getCount() {
-            return bottomList.size();
+            return accessoryList.size();
         }
 
         @Override
@@ -59,7 +59,7 @@ public class FragmentBottom extends Fragment {
             imageview.setLayoutParams(new GridView.LayoutParams(350, 450));
             imageview.setScaleType(ImageView.ScaleType.FIT_CENTER);
             imageview.setPadding(5, 5, 5, 5);
-            imageview.setImageBitmap(bottomList.get(i).getImage());
+            imageview.setImageBitmap(accessoryList.get(i).getImage());
             index = i;
 
             imageview.setOnClickListener(new View.OnClickListener() {
@@ -68,13 +68,17 @@ public class FragmentBottom extends Fragment {
                     View goView = (View) View.inflate(getContext(), R.layout.activity_view_clothes, null);
                     Intent intent = new Intent(getContext(), ViewClothesActivity.class);
                     intent.putExtra("index", index);
-                    intent.putExtra("category", 1);
+                    intent.putExtra("category", 4);
                     startActivity(intent);
                 }
             });
             return imageview;
         }
     }
+
+
+
+
 
 
 }
