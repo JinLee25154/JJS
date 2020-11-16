@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1039449688700",
+    "firebase_url": "https://mobileprogramming-teamproject.firebaseio.com",
+    "project_id": "mobileprogramming-teamproject",
+    "storage_bucket": "mobileprogramming-teamproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039449688700:android:5c3c168f2087c7fb55d7f9",
+        "android_client_info": {
+          "package_name": "com.example.mobileprogramming_teamproject_leejin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039449688700-1hg2j6cc6mt01anf1sapd0ccqt2u130a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcM_yp-3qzo6R1ehR9-ERllRCXow14jJo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039449688700-1hg2j6cc6mt01anf1sapd0ccqt2u130a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
