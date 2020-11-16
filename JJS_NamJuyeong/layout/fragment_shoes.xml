@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <GridView
-        android:id="@+id/outerGrid"
+        android:id="@+id/shoesGrid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:numColumns="3"/>
