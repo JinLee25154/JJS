@@ -19,7 +19,10 @@ import androidx.annotation.Nullable;
 
 import java.io.InputStream;
 
+import static com.example.closet.FragmentAccessory.accessoryList;
 import static com.example.closet.FragmentBottom.bottomList;
+import static com.example.closet.FragmentOuter.outerList;
+import static com.example.closet.FragmentShoes.shoesList;
 import static com.example.closet.FragmentTop.topList;
 
 public class ClothesRegistrationActivity extends Activity {
@@ -99,7 +102,14 @@ public class ClothesRegistrationActivity extends Activity {
                         topList.add(new Clothes(choiceClothesImageBitmap, category, clothesExplanation.getText().toString()));
                     }else if(category==1){
                         bottomList.add(new Clothes(choiceClothesImageBitmap, category, clothesExplanation.getText().toString()));
+                    }else if(category==2) {
+                        outerList.add(new Clothes(choiceClothesImageBitmap, category, clothesExplanation.getText().toString()));
+                    }else if(category==3) {
+                        shoesList.add(new Clothes(choiceClothesImageBitmap, category, clothesExplanation.getText().toString()));
+                    }else if(category==4) {
+                        accessoryList.add(new Clothes(choiceClothesImageBitmap, category, clothesExplanation.getText().toString()));
                     }
+
 
 
                     finish();
